@@ -6,11 +6,32 @@
 /*   By: hgamiz-g <hgamiz-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:14:11 by hgamiz-g          #+#    #+#             */
-/*   Updated: 2025/12/15 16:37:34 by hgamiz-g         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:36:32 by hgamiz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/taskmanager.hpp"
+
+bool    valid_command(char *str)
+{
+    std::string input_command = str;
+    if ((input_command != "add") && (input_command != "view") &&
+        (input_command != "delete") && (input_command != "complete"))
+        return (false);
+    return (true);
+}
+
+bool    parse_command(char **argv, t_command *command)
+{
+    if (!valid_command(argv[1]))
+    {
+        command = NULL;
+        return (false);
+    }
+    command->command = argv[1];
+
+    return (true);
+}
 
 void    displayOptions(void)
 {

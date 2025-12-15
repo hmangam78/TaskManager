@@ -6,7 +6,7 @@
 /*   By: hgamiz-g <hgamiz-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:29:57 by hgamiz-g          #+#    #+#             */
-/*   Updated: 2025/12/15 16:45:26 by hgamiz-g         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:32:58 by hgamiz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,40 @@ int main(int argc, char **argv)
         return (0);
     }
 
-    std::ifstream   file("tasks.csv");
-    if (!file.is_open())
-        std::cout << "Error opening file" << std::endl;
-        
+    std::ifstream   infile("tasks.csv");
     TaskList    list;
-    list.loadFromFile(file);
-    
-    std::string command = argv[1];
-    if (command == "add")
-        add_task(argv, list);
-    else if (command == "delete")
-        std::cout << "delete" << std::endl;
-    else if (command == "complete")
-        std::cout << "complete" << std::endl;
-    else if (command == "view")
-        std::cout << "view" << std::endl;
+    if (infile.is_open())
+    {
+        list.loadFromFile(infile);
+        infile.close();
+    }
     else
-        displayOptions();
+        std::cout << "Creating new task file..." << std::endl;
+
+    t_command input;
+    if (!parse_command(argv, &input))
+    {
+        std::cout << "Invalid command, execute ./taskmanager for help" << std::endl;
+        return (1);
+    }
+    if (input.command == "add")
+        add_task(argv, list);
+    else if (input.command == "delete")
+        std::cout << "delete" << std::endl;
+    else if (input.command == "complete")
+        std::cout << "complete" << std::endl;
+    else if (input.command == "view")
+        std::cout << "view" << std::endl;
+
+    std::ofstream   outfile("tasks.csv");
+    if (outfile.is_open())
+    {
+        list.saveToFile(outfile);
+        outfile.close();
+        std::cout << "Tasks saved to tasks.csv" << std::endl;
+    }
+    else
+        std::cerr << "Error: Could not save to tasks.csv" << std::endl;
     
     return (0);
 }
