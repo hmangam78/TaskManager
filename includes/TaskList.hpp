@@ -6,7 +6,7 @@
 /*   By: hgamiz-g <hgamiz-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:37:31 by hgamiz-g          #+#    #+#             */
-/*   Updated: 2025/12/15 15:15:33 by hgamiz-g         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:38:57 by hgamiz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "Task.hpp"
 #include <iomanip>
 #include <vector>
+#include <fstream>
 
 class   TaskList
 {
@@ -29,7 +30,9 @@ class   TaskList
     //getters
         Task    getTask(size_t index) const;
     //Display tasks
-        void    displayTasks(void) const; 
+        void    displayTasks(void) const;
+        void    loadFromFile(std::ifstream& file);
+        void    saveToFile(std::ofstream& file) const;
     
 };
 

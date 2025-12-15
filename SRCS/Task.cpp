@@ -6,12 +6,22 @@
 /*   By: hgamiz-g <hgamiz-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:21:32 by hgamiz-g          #+#    #+#             */
-/*   Updated: 2025/12/15 15:10:30 by hgamiz-g         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:28:03 by hgamiz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Task.hpp"
 
+Task::Task(const std::string& task, const std::string& tag, bool status,std::chrono::system_clock::time_point creation_date, 
+           std::optional<std::chrono::system_clock::time_point> completion_date)
+{
+    _task = task;
+    _tag = tag;
+    _completed = status;
+    _creation_date = creation_date;
+    _completion_date = completion_date;
+}
+     
 Task::Task(const std::string& task, const std::string& tag)
 {
     _task = task;
@@ -63,6 +73,11 @@ bool        Task::get_status(void) const
 std::chrono::system_clock::time_point Task::get_date(void) const
 {
     return (this->_creation_date);
+}
+
+std::optional<std::chrono::system_clock::time_point> Task::get_completion_date(void) const
+{
+    return (this->_completion_date);
 }
 
 void        Task::complete(void)

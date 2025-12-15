@@ -6,7 +6,7 @@
 /*   By: hgamiz-g <hgamiz-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:14:11 by hgamiz-g          #+#    #+#             */
-/*   Updated: 2025/12/15 15:25:26 by hgamiz-g         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:37:34 by hgamiz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ void    displayOptions(void)
     std::cout << "Options" << std::endl;
 }
 
-void    add_task(char **argv)
+void    add_task(char **argv, TaskList& list)
 {
-    TaskList    list;
     std::string task_string;
 
     for (int i = 2; argv[i] != NULL; i++)
